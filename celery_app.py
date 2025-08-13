@@ -7,3 +7,4 @@ app = Celery(
     backend=os.getenv("CELERY_RESULT_BACKEND", "redis://redis:6379/1"),
 )
 app.conf.task_routes = {"tasks.*": {"queue": "auth"}}
+app.conf.imports = ("tasks_signup_minimal",)

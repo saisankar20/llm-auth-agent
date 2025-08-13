@@ -1,24 +1,11 @@
 {
-  "site_id": "realworld",
-  "strategy": "form_browser",
-  "signup": {
-    "url": "https://demo.realworld.io/#/register",
-    "fields": {
-      "username_placeholder": "Username",
-      "email_placeholder": "Email",
-      "password_placeholder": "Password"
-    },
-    "submit_text": "Sign up",
-    "success_url_contains": "#/"
+  "start_url": "https://demo.realworld.io/#/register",
+  "selectors": {
+    "username": "input[placeholder='Username']",
+    "email": "input[placeholder='Email']",
+    "password": "input[placeholder='Password']",
+    "submit": "button:has-text(\"Sign up\")"
   },
-  "login": {
-    "url": "https://demo.realworld.io/#/login",
-    "fields": {
-      "email_placeholder": "Email",
-      "password_placeholder": "Password"
-    },
-    "submit_text": "Sign in",
-    "success_url_contains": "#/"
-  },
-  "probe_endpoints": []
+  "success_selector": "text=Your Feed",
+  "wait_ms": 8000
 }

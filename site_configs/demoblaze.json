@@ -1,0 +1,25 @@
+{
+  "site_id": "demoblaze",
+  "strategy": "form_browser",
+  "start_url": "https://www.demoblaze.com/",
+  "signup": {
+    "open": { "click": "#signin2", "wait_for": "#signInModal" },
+    "fields": {
+      "username": "#sign-username",
+      "password": "#sign-password"
+    },
+    "submit": "#signInModal .btn-primary",
+    "success": { "type": "dialog_contains", "value": "successful" }
+  },
+  "login_after_signup": true,
+  "login": {
+    "open": { "click": "#login2", "wait_for": "#logInModal" },
+    "fields": {
+      "username": "#loginusername",
+      "password": "#loginpassword"
+    },
+    "submit": "#logInModal .btn-primary",
+    "success_locator": "#nameofuser"
+  },
+  "storage_state_path": "/app/storage/demoblaze.storage.json"
+}
