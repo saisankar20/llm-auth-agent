@@ -1,0 +1,9 @@
+celery[redis]==5.4.0
+redis==5.0.7
+requests==2.32.3
+playwright==1.53.0
+psycopg[binary]==3.2.1
+pydantic==2.11.7
+python-dotenv==1.0.1
+flower==2.0.1
+browser-use==0.5.11

@@ -1,0 +1,6 @@
+{
+  "site_id": "saucedemo",
+  "strategy": "browser_use",
+  "start_url": "https://www.saucedemo.com/",
+  "allowed_domains": ["https://www.saucedemo.com"]
+}

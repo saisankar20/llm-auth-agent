@@ -1,0 +1,60 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: llm-auth-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: observability
+      POSTGRES_DB: observability
+    ports:
+      - "5432:5432"              # expose for local psql if needed
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U observability -d observability"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7
+    container_name: llm-auth-redis
+    restart: unless-stopped
+    command: ["redis-server","--appendonly","yes"]
+    # ports:
+    #   - "6379:6379"            # uncomment if you want to connect from host
+    volumes:
+      - redisdata:/data
+
+  worker:
+    build: .
+    shm_size: 1gb
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      DB_DSN: postgresql://observability:changeme@postgres:5432/observability
+    volumes:
+      - ./:/app
+    depends_on: [postgres, redis]
+    command: ["celery","-A","tasks","worker","-Q","auth","-l","info","-I","tasks_signup"]
+
+  flower:
+    build: .
+    container_name: llm-auth-flower
+    restart: unless-stopped
+    command:
+      - "celery"
+      - "-A"
+      - "tasks"
+      - "flower"
+      - "--broker=redis://redis:6379/0"
+      - "--result-backend=redis://redis:6379/1"
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+
+volumes:
+  pgdata:
+  redisdata:

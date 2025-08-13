@@ -1,0 +1,24 @@
+{
+  "site_id": "realworld",
+  "strategy": "form_browser",
+  "signup": {
+    "url": "https://demo.realworld.io/#/register",
+    "fields": {
+      "username_placeholder": "Username",
+      "email_placeholder": "Email",
+      "password_placeholder": "Password"
+    },
+    "submit_text": "Sign up",
+    "success_url_contains": "#/"
+  },
+  "login": {
+    "url": "https://demo.realworld.io/#/login",
+    "fields": {
+      "email_placeholder": "Email",
+      "password_placeholder": "Password"
+    },
+    "submit_text": "Sign in",
+    "success_url_contains": "#/"
+  },
+  "probe_endpoints": []
+}

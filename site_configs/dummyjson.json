@@ -1,0 +1,16 @@
+{
+  "id": "dummyjson",
+  "strategy": "http_api",
+  "auth": {
+    "login": {
+      "url": "https://dummyjson.com/auth/login",
+      "method": "POST",
+      "payload": { "username": "{{username}}", "password": "{{password}}", "expiresInMins": 30 },
+      "token_json_pointer": "/accessToken"
+    },
+    "secrets": { "username": "emilys", "password": "emilyspass" }
+  },
+  "probe_endpoints": [
+    { "name": "me", "url": "https://dummyjson.com/auth/me", "auth": "bearer" }
+  ]
+}
